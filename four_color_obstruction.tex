@@ -1,0 +1,356 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.05in]{geometry}
+\usepackage[expansion=false]{microtype}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={Why the sphere-product construction needs five colors},pdfauthor={Julius A. Zeiss}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\sgn}{\operatorname{sgn}}
+
+\title{Why the sphere-product construction needs five colors}
+\author{Julius A. Zeiss}
+\date{September 22, 2026, revised November 26, 2026}
+\subjclass[2020]{05C15, 05C76, 55M35, 55N91}
+\keywords{Hedetniemi conjecture, graph product, Hom complex, equivariant map, Borel cohomology}
+
+\begin{document}
+\begin{abstract}
+The accompanying paper constructs finite graphs of arbitrarily large chromatic number whose categorical product is five-colorable. We prove that the products in this construction have chromatic number exactly five in every odd sphere dimension $m\geq57$. More generally, for an odd prime $p$ and odd $m>4p+4$, we show that there is no $C_2\times C_p$-equivariant map from $S^m\times S^m$ to $\Hom(C_{2p},K_4)$ for the sphere and cycle actions defining the construction. We obtain this obstruction from an integral cocycle on the Hom complex, a circle-valued map with distinct restrictions to the two Sylow fixed sets, and Borel cohomology. A four-coloring of the finite graph product would induce the excluded map.
+\end{abstract}
+\maketitle
+
+\section{Statement and scope}
+
+Fix an odd prime $p$. Write $\Gamma=C_2\times C_p$, with generators $a,b$, and identify its cyclic generator with $\rho=ab$. Let
+\[
+ T=\Hom(C_{2p},K_4),
+\]
+using the usual product-of-simplices realization of the Hom complex~\cite{BabsonKozlov}. The cycle vertices are indexed by $\Z/(2p)$, and $\rho$ acts by shifting coordinates:
+\begin{equation}\label{eq:shift}
+ (\rho x)_i=x_{i+1}.
+\end{equation}
+Thus $a=\rho^p$ and $b=\rho^{p+1}$ on $T$. On a product of odd-dimensional spheres, the actions in this note are
+\begin{equation}\label{eq:source}
+ a(x,y)=(-x,y),\qquad b(x,y)=(x,\zeta y),
+ \qquad \zeta=e^{2\pi i/p},
+\end{equation}
+where the second sphere lies in $\C^{(m+1)/2}$.
+
+\begin{theorem}\label{thm:no-map}
+If $m$ is odd and $m>4p+4$, there is no continuous $\Gamma$-equivariant map
+\[
+ S^m\times S^m\longrightarrow T
+\]
+for the actions~\eqref{eq:shift} and~\eqref{eq:source}.
+\end{theorem}
+
+The accompanying paper~\cite{Companion} takes $p=13$ and constructs finite generalized Borsuk graphs on fine triangulations of these two spheres. Section~\ref{sec:graphs} shows that a four-coloring of their product would induce the map excluded by Theorem~\ref{thm:no-map}. The five-color upper bound is therefore sharp for these products whenever $m$ is odd and $m\geq57$. The possibility of other graph families realizing the uniform four-color bound proposed in~\cite{Raanes} remains open.
+
+\section{A cocycle and a circle-valued map}\label{sec:cocycle}
+
+A cell of $T$ is specified by nonempty sets $A_i\subseteq V(K_4)$ such that $A_i\cap A_{i+1}=\varnothing$. Its realization is $\prod_i\Delta^{A_i}$, with faces obtained by shrinking coordinate sets. In particular, a vertex is a proper coloring $c=(c_i)$ of the cycle, and an edge recolors a single cycle vertex. Identify the four colors with $\F_2^2$, ordered once and for all as $0,1,2,3$. For four colors, write $\epsilon(a,c,b,d)$ for the sign of the indicated permutation of the four colors, and set it to zero if they are not all distinct.
+
+\begin{lemma}\label{lem:cocycle}
+For an oriented edge $c\to c'$ which recolors coordinate $i$, define
+\begin{equation}\label{eq:lambda}
+ \lambda(c\to c')=(-1)^i\epsilon(c_{i-1},c_i,c_{i+1},c'_i).
+\end{equation}
+This is an integral cellular one-cocycle on $T$, and
+\[
+ \lambda(\rho e)=-\lambda(e)
+\]
+for every oriented edge $e$.
+\end{lemma}
+\begin{proof}
+Reversing the edge exchanges the second and fourth entries in~\eqref{eq:lambda}, so it changes the sign. Shifting coordinates moves the recolored coordinate from $i$ to $i-1$. Since the cycle length is even, this negates the factor $(-1)^i$, including across the wraparound.
+
+It remains to check every two-cell. A triangular cell recolors one coordinate among three colors. Its two neighbors must both have the same fourth color, so all three edge values vanish. In a square which recolors nonadjacent coordinates, each recoloring leaves the neighbors of the other coordinate unchanged, and opposite edges cancel.
+
+For an adjacent-coordinate square, let coordinates $i,i+1$ vary in disjoint pairs $\{c,d\},\{a,b\}$, respectively. The outer left neighbor $l$ lies in $\{a,b\}$, and the outer right neighbor $r$ lies in $\{c,d\}$. Traverse the square as
+\[
+ (c,a)\to(d,a)\to(d,b)\to(c,b)\to(c,a).
+\]
+After removing the common factor $(-1)^i$, its sum is
+\begin{align*}
+ &\epsilon(l,c,a,d)+\epsilon(l,d,b,c)\\
+ &\hspace{2em}-\epsilon(d,a,r,b)-\epsilon(c,b,r,a).
+\end{align*}
+Exactly one term in each pair is nonzero. The first pair equals $\epsilon(a,d,b,c)$ for either choice of $l$, and the second pair equals the same sign for either choice of $r$. Their difference vanishes. These are all possible two-cells of a product-of-simplices complex.
+\end{proof}
+
+For a proper coloring $c$, put
+\[
+ d_i=c_i+c_{i+1}\in\F_2^2\setminus\{0\}.
+\]
+These are three possible \emph{edge letters}. Fix an ordering of those letters and let $\sigma(c)\in\Z/2$ be the inversion parity of the word $(d_0,\ldots,d_{2p-1})$.
+
+\begin{lemma}\label{lem:parity}
+The three edge-letter multiplicities are even, $\sigma(\rho c)=\sigma(c)$, and
+\begin{equation}\label{eq:parity}
+ \lambda(c\to c')\equiv\sigma(c')-\sigma(c)\pmod2.
+\end{equation}
+\end{lemma}
+\begin{proof}
+The sum of all edge letters is zero. Since the three nonzero vectors of $\F_2^2$ are $u,v,u+v$, their multiplicities have the same parity. Their total $2p$ is even, so all three multiplicities are even.
+
+A cyclic shift moves one letter past all the other letters. The number different from that letter is even, proving cyclic invariance of inversion parity. If the two neighbors of a recolored vertex coincide, the affected adjacent edge letters change from $xx$ to $yy$, which preserves inversion parity. If the neighbors differ, all four neighbor, old, and new colors are distinct. The two affected, distinct edge letters are interchanged, changing inversion parity by one. Cyclic invariance handles a recoloring at the wraparound. These changes agree with~\eqref{eq:lambda} modulo two.
+\end{proof}
+
+\begin{proposition}\label{prop:circle}
+There is a continuous map
+\[
+ u:T\longrightarrow\R/2\Z
+\]
+such that $u(c)=\sigma(c)$ at every proper-coloring vertex and
+\begin{equation}\label{eq:circle-equiv}
+ u(\rho x)=-u(x).
+\end{equation}
+\end{proposition}
+\begin{proof}
+On each cell $\eta=\prod_i\Delta^{A_i}$, integrate $\lambda$ along its vertex-edge graph to an integer potential $L_\eta$. This is possible because the cell is contractible and $\lambda$ vanishes on its two-cells. Choose the additive constant so that $L_\eta(c)\equiv\sigma(c)\pmod2$ at one vertex, hence at every vertex by Lemma~\ref{lem:parity}.
+
+Write a point of this cell using probability coordinates $x_{i,j}$, $j\in A_i$. Define
+\begin{equation}\label{eq:interpolation}
+ u_\eta(x)=
+ \sum_{c\in\prod_i A_i}
+ \left(\prod_i x_{i,c_i}\right)L_\eta(c)
+ \pmod{2\Z}.
+\end{equation}
+Every tuple in this sum is a proper coloring. On a shared face, the two potentials differ by a constant even integer. Since the weights in~\eqref{eq:interpolation} sum to one and restrict to the corresponding face weights, the maps agree modulo $2\Z$. Thus they define a continuous global map.
+
+By Lemmas~\ref{lem:cocycle} and~\ref{lem:parity}, the functions $L_{\rho\eta}(\rho c)$ and $-L_\eta(c)$ differ by a constant even integer on the cell's vertices. The product weights are permuted by rotation, so~\eqref{eq:circle-equiv} follows throughout the cell.
+\end{proof}
+
+\section{The two fixed sets}\label{sec:fixed}
+
+\begin{lemma}\label{lem:fixed}
+The map $u$ has the following properties:
+\begin{enumerate}
+\item $u=1$ on $T^{C_2}$;
+\item $T^{C_p}\cong S^2$, and $u|_{T^{C_p}}$ has a real lift $v$ satisfying
+\begin{equation}\label{eq:v}
+ v(ax)=-v(x).
+\end{equation}
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+A $C_2$-fixed configuration is $p$-periodic, so $T^{C_2}$ is naturally $\Hom(C_p,K_4)$. At a $p$-periodic proper-coloring vertex, the edge word has the form $ww$, where $w$ has odd length $p$. The three letter multiplicities $N_1,N_2,N_3$ in $w$ are all odd, by the same zero-sum argument used in Lemma~\ref{lem:parity}. Its inversion parity is therefore
+\[
+ \sigma(ww)=2\sigma(w)+\sum_{r>s}N_rN_s=1\pmod2.
+\]
+On the fixed set,~\eqref{eq:circle-equiv} implies $u=-u$, since $a=\rho^p$ and $p$ is odd. Thus $u$ takes values in $\{0,1\}$. Each fixed point belongs to a connected fixed subcell containing a $p$-periodic proper-coloring vertex. The value on that subcell is consequently one. This proves the first assertion without any connectedness assumption on $\Hom(C_p,K_4)$.
+
+A $C_p$-fixed configuration is two-periodic. Hence $T^{C_p}$ identifies with $\Hom(K_2,K_4)$: pairs of probability vectors $(A,B)$ with nonempty disjoint supports. The map
+\[
+ (A,B)\longmapsto A-B
+\]
+is a homeomorphism onto
+\[
+ \left\{z\in\R^4:\sum_j z_j=0,\ \|z\|_1=2\right\}.
+\]
+Its inverse is $z\mapsto(z_+,z_-)$: the zero-sum and norm conditions make both parts probability vectors with disjoint supports. Radial normalization identifies this set with the Euclidean unit sphere in the three-dimensional zero-sum subspace. Exchanging the pair is the antipodal action in either model. Thus this fixed set is a simply connected two-sphere, and $u$ has a real lift $v$ on it.
+
+Normalize $v$ to be zero at the alternating vertex $A=(0,1)$. The path
+\[
+ (0,1)\to(2,1)\to(2,0)\to(1,0)=aA
+\]
+has $u$ identically zero. Indeed, each stage varies one parity class while the other parity class has a single fixed color. On the containing ambient product cell, every recolored vertex has equal neighbors, so $\lambda$ is zero on every edge. The potential, and its interpolation, are constant zero modulo two. Continuity of the lift along this path gives $v(aA)=0$.
+
+The continuous function $v(ax)+v(x)$ takes values in $2\Z$ by~\eqref{eq:circle-equiv}. The fixed two-sphere is connected, so this function is constant. Its value at $A$ is zero, proving~\eqref{eq:v}.
+\end{proof}
+
+The preceding lemma already obstructs a four-coloring of the entire three-sphere target from the companion construction.
+
+\begin{proposition}\label{prop:full-target}
+On $W'_p=S(\C\oplus\C)$, let
+\[
+ a(z,w)=(-z,w),\qquad b(z,w)=(z,\zeta^q w),
+\]
+where $q$ is coprime to $p$. There is no $\Gamma$-equivariant map $W'_p\to T$.
+\end{proposition}
+\begin{proof}
+Suppose $F$ were such a map. Since $W'_p\cong S^3$ is simply connected, $u\circ F$ has a real lift $U$. The function $D(x)=U(ax)+U(x)$ is continuous with values in $2\Z$, so it is constant. At an $a$-fixed point, $F(x)\in T^{C_2}$ and $U(x)$ is an odd integer by Lemma~\ref{lem:fixed}. Hence $D\equiv2\pmod4$.
+
+The $C_p$-fixed circle of $W'_p$ is connected. On it, $U$ and $v\circ F$ differ by one constant even integer $2j$. Equation~\eqref{eq:v} then gives $D=4j$, a contradiction.
+\end{proof}
+
+\section{The obstruction for free sphere products}\label{sec:borel}
+
+We next establish the stronger statement needed to exclude a coloring restricted to the image of a sphere-product map. All equivariant cohomology in this section is Borel cohomology, with coefficients in $\F_p$.
+
+\begin{lemma}\label{lem:borel}
+Let $P=C_p$ act simplicially on a complex $X$ of dimension at most $D$. After subdivision, suppose that each setwise simplex stabilizer fixes that simplex pointwise. The complex may have infinitely many cells. Then
+\[
+ H_P^d(X,X^P;\F_p)=0\qquad(d>D).
+\]
+Consequently, restriction $H_P^d(X;\F_p)\to H_P^d(X^P;\F_p)$ is an isomorphism for $d>D$.
+\end{lemma}
+\begin{proof}
+Since $p$ is prime, every simplex outside the fixed subcomplex has trivial stabilizer. Filter the relative Borel construction by the skeleta of $X$. The cellular filtration spectral sequence has
+\[
+ E_1^{s,t}=\prod_{[e^s]}H^t(BP_e;\F_p),
+\]
+where the product is over relative $s$-cell orbits and $P_e$ is their stabilizer. This description follows by excision on the cell pairs: the corresponding Borel cell pair is homotopy equivalent to
+\[
+ BP_e\times(D^s,S^{s-1}).
+\]
+All the stabilizers here are trivial, so the page is concentrated in $t=0$ and $0\leq s\leq D$. The filtration has only finitely many stages, even when the sets of cells are infinite. It therefore gives the asserted vanishing in total degrees greater than $D$. The long exact sequence of the pair gives the restriction isomorphism.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:no-map}]
+Suppose $F:S^m\times S^m\to T$ is equivariant. Since the source is simply connected, $u\circ F$ has a real lift $U$. There is an integer $k$ such that
+\begin{equation}\label{eq:source-lifts}
+ U(as)=2k-U(s),\qquad U(bs)=U(s).
+\end{equation}
+For the first identity, $U(as)+U(s)$ is a continuous $2\Z$-valued function on a connected space. For the second, $U(bs)-U(s)$ is likewise a constant even integer; iterating $b$ through its order $p$ makes that integer zero.
+
+Form the covering space
+\[
+ X=\{(t,h)\in T\times\R:u(t)=h\pmod{2\Z}\}
+\]
+with the lifted actions
+\begin{equation}\label{eq:cover-action}
+ b(t,h)=(bt,h),\qquad a_k(t,h)=(at,2k-h).
+\end{equation}
+These commute and have the required orders. The map
+\[
+ \widehat F(s)=(F(s),U(s))
+\]
+is equivariant for them.
+
+We have $\dim X=\dim T\leq2p$. To see the bound on $T$, adjacent coordinate sets of a cell satisfy $|A_i|+|A_{i+1}|\leq4$. Summing around the cycle gives $\sum_i|A_i|\leq4p$, so the cell dimension is
+\[
+ \sum_i(|A_i|-1)\leq2p.
+\]
+The cover of the finite complex $T$ has a locally finite, finite-dimensional lifted cell structure. Subdividing makes the lifted finite-group actions simplicial without inversions. In particular, Lemma~\ref{lem:borel} applies despite the cover's possible noncompactness.
+
+If $k$ is even, $a_k$ acts freely on $X$. Indeed, a fixed point would require $t\in T^{C_2}$ and $h=k$, whereas Lemma~\ref{lem:fixed} gives $u(t)=1\pmod2$. Restricting $\widehat F$ to the first sphere with the second coordinate fixed gives a $C_2$-equivariant map from the $(m-1)$-connected sphere $S^m$ to a free $C_2$-complex of dimension at most $2p<m$. Dold's theorem~\cite{Dold} excludes this.
+
+Suppose instead that $k$ is odd. By Lemma~\ref{lem:fixed}, the fixed set of the cover is the disjoint union
+\begin{equation}\label{eq:fixed-sheets}
+ X^{C_p}=\coprod_{j\in\Z}
+ \{(t,v(t)+2j):t\in T^{C_p}\}.
+\end{equation}
+Each component is a two-sphere. By~\eqref{eq:v} and~\eqref{eq:cover-action}, $a_k$ sends component $j$ to component $k-j$. As $k$ is odd, the components occur in pairs with no fixed component. Choose a locally constant function
+\[
+ \phi:X^{C_p}\longrightarrow\F_p
+\]
+which takes values $+1,-1$ on the two members of each pair. Then $a_k^*\phi=-\phi$ and $\phi^2=1$.
+
+Write $t\in H^2(BC_p;\F_p)$ for the polynomial generator, also denoting its pullbacks by $t$, and put $N=p+1$. Since $2N=2p+2>\dim X$, Lemma~\ref{lem:borel} gives a unique class
+\[
+ z\in H_{C_p}^{2N}(X;\F_p)
+\]
+restricting to $\phi t^N$. The action $a_k$ commutes with $C_p$ and acts trivially on the base $BC_p$. Naturality and uniqueness of this lift yield $a_k^*z=-z$. Restriction is also injective in degree $4N$, so $\phi^2=1$ gives
+\begin{equation}\label{eq:square}
+ z^2=t^{2N}.
+\end{equation}
+
+The source action of $C_p$ is free, so its Borel construction is homotopy equivalent to
+\[
+ S^m\times L_p^m,\qquad L_p^m=S^m/C_p.
+\]
+In degrees below $m$, its even cohomology is generated by the corresponding powers of $t$, and $a$ acts trivially there. In particular, $t^{2N}$ is nonzero in degree $4N<m$; these are the usual lens-space cohomology classes~\cite[Example~3.41]{HatcherAT}. Pulling back $z$ along $\widehat F$ gives an anti-invariant class in degree $2N<m$, in which $a$ acts trivially. Since $p$ is odd, the pullback is zero. But~\eqref{eq:square} would then pull back to
+\[
+ 0=t^{2N}\neq0,
+\]
+a contradiction. Thus the odd case is impossible as well.
+\end{proof}
+
+\section{Consequences for finite graphs}\label{sec:graphs}
+
+For an isometry $\alpha$ of a metric space, use the generalized Borsuk adjacency
+\[
+ x\sim y\quad\Longleftrightarrow\quad
+ d(x,\alpha^{-1}y)<\delta
+ \ \text{or}\ d(y,\alpha^{-1}x)<\delta.
+\]
+We use scales below the minimum displacement of the generator, so these graphs have no loops. If $T_0$ is a finite equivariant triangulation of the space, write $B_\alpha(T_0,\delta)$ for the induced graph on its vertices.
+
+\begin{corollary}\label{cor:finite}
+Let $m$ be odd with $m>4p+4$. Let $T_2,T_p$ be finite equivariant triangulations of the two spheres in~\eqref{eq:source}, both with angular mesh less than $\delta$, where $0<\delta<2\pi/p$. Put
+\[
+ G=B_{-\mathrm{id}}(T_2,\delta),\qquad
+ H=B_\omega(T_p,\delta),\qquad \omega y=\zeta y.
+\]
+Then $\chi(G\times H)\geq5$.
+\end{corollary}
+\begin{proof}
+Use the product cell complex $T_2\times T_p$. Its vertices are precisely the pairs in $V(G)\times V(H)$. For a nonempty product face $\sigma\times\tau$, define
+\[
+ \eta_{\sigma\times\tau}(i)
+ =(ab)^i\bigl(V(\sigma)\times V(\tau)\bigr).
+\]
+For any $x,x'\in V(\sigma)$ and $y,y'\in V(\tau)$, the mesh inequalities give
+\begin{align*}
+ d((-1)^ix,-(-1)^{i+1}x')&=d(x,x')<\delta,\\
+ d(\omega^iy,\omega^{-1}\omega^{i+1}y')&=d(y,y')<\delta.
+\end{align*}
+Thus every pair in successive coordinate sets is adjacent in $G\times H$. This defines an order-preserving equivariant map from the nonempty-face poset of $T_2\times T_p$ to the multihomomorphism poset for $\Hom(C_{2p},G\times H)$. The realization of the first poset is equivariantly homeomorphic to $S^m\times S^m$.
+
+A four-coloring of $G\times H$ would induce, by postcomposition, an equivariant map from this product of spheres to $T$. Theorem~\ref{thm:no-map} excludes it.
+\end{proof}
+
+\begin{corollary}
+For $p=13$ and odd $m>56$, the finite graph products constructed in~\cite{Companion}, using the continuity scale of its equivariant map and sufficiently fine triangulations, have chromatic number exactly five.
+\end{corollary}
+\begin{proof}
+The five-coloring in~\cite[Theorem~1.1]{Companion} gives the upper bound, and Corollary~\ref{cor:finite} gives the lower bound. For each $n\geq3$, choosing any odd $m>\max\{56,6n-13\}$ also gives $\chi(G),\chi(H)>n$ by~\cite[Lemma~3.2]{Companion}.
+\end{proof}
+
+\begin{corollary}
+For $q=(p-1)/2$, let $\beta_p=ab$ act on $W'_p$ as in Proposition~\ref{prop:full-target}. The full graph $B_{\beta_p}(W'_p,\eps)$ is not four-colorable at any positive loopless scale. For $p=13$ and $0<\eps\leq1/4$, its chromatic number is exactly five.
+\end{corollary}
+\begin{proof}
+A four-coloring, restricted to the vertices of a fine equivariant triangulation of $W'_p$, would give a $\Gamma$-map to $T$: send a nonempty face $\sigma$ to the multihomomorphism $i\mapsto\beta_p^iV(\sigma)$, and postcompose with the coloring. The mesh condition verifies adjacency as above. Proposition~\ref{prop:full-target} excludes this map. The upper bound for $p=13$ and $\eps\leq1/4$ is the explicit five-coloring in~\cite{Companion}.
+\end{proof}
+
+Any four-coloring of the image of the vertex map used in~\cite{Companion} would pull back to a four-coloring of $G\times H$. Thus Corollary~\ref{cor:finite} also excludes obtaining four colors by restricting the target to the image.
+
+\section*{Development note}
+The cocycle, parity, covering-space, and equivariant-cohomology arguments in this paper were developed with substantial assistance from OpenAI Codex. The five-color construction in~\cite{Companion} uses Raanes's generalized Borsuk graph framework~\cite{Raanes}.
+
+\begin{thebibliography}{9}
+\bibitem{BabsonKozlov}
+E. Babson and D. N. Kozlov,
+\emph{Complexes of graph homomorphisms},
+Israel J. Math. \textbf{152} (2006), 285--312.
+\href{https://arxiv.org/abs/math/0310056}{arXiv:math/0310056}.
+
+\bibitem{Dold}
+A. Dold,
+\emph{Simple proofs of some Borsuk--Ulam results},
+Contemp. Math. \textbf{19} (1983), 65--69.
+
+\bibitem{HatcherAT}
+A. Hatcher,
+\emph{Algebraic Topology},
+Cambridge University Press, Cambridge, 2002.
+\url{https://pi.math.cornell.edu/~hatcher/AT/AT.pdf}.
+
+\bibitem{Raanes}
+S. Raanes,
+\emph{Counterexamples to the weak Hedetniemi Conjecture},
+preprint, 2026.
+\href{https://arxiv.org/abs/2608.07818v1}{arXiv:2608.07818v1}.
+
+\bibitem{Companion}
+J. A. Zeiss,
+\emph{An obstruction and a five-color construction for the weak Hedetniemi conjecture},
+accompanying manuscript, November 2026.
+\end{thebibliography}
+\end{document}

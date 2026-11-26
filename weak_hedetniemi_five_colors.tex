@@ -1,0 +1,487 @@
+\documentclass[11pt]{amsart}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.05in]{geometry}
+\usepackage[expansion=false]{microtype}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\hypersetup{pdftitle={An obstruction and a five-color construction for the weak Hedetniemi conjecture},pdfauthor={Julius A. Zeiss}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\numberwithin{equation}{section}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\N}{\mathbb N}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\triv}{\underline{\R}}
+
+\title[An obstruction and a five-color construction]{An obstruction and a five-color construction\newline for the weak Hedetniemi conjecture}
+\author{Julius A. Zeiss}
+\date{September 22, 2026, revised November 26, 2026}
+\subjclass[2020]{05C15, 05C76, 55M35, 55R40}
+\keywords{Hedetniemi conjecture, graph product, equivariant map, Borsuk graph, characteristic classes}
+
+\begin{document}
+\begin{abstract}
+We construct pairs of finite simple graphs with arbitrarily large chromatic numbers whose categorical product is five-colorable. This disproves the weak Hedetniemi conjecture. In Raanes's generalized Borsuk graph construction, an equivariant map to a representation two-sphere would give a four-coloring. We give a characteristic-class obstruction to that map, already on $S^1\times S^5$. Adding one sign coordinate gives a representation three-sphere. We construct an equivariant self-map of degree zero on this sphere and use it to extend maps over finite free complexes. The associated target graph has chromatic number exactly five, and fine equivariant triangulations give finite graphs whose product maps to it.
+\end{abstract}
+\maketitle
+
+\section{Introduction}
+
+The categorical product $G\times H$ of graphs $G$ and $H$ has vertex set $V(G)\times V(H)$, with
+\[
+ (u,v)\sim(u',v')\quad\Longleftrightarrow\quad
+ u\sim u'\text{ in }G\text{ and }v\sim v'\text{ in }H.
+\]
+The coordinate projections give $\chi(G\times H)\leq\min\{\chi(G),\chi(H)\}$. Hedetniemi conjectured equality, which Shitov disproved in~\cite{Shitov}. For finite simple graphs, the Poljak--R\"odl function is
+\[
+ f(n)=\min\{\chi(G\times H):\chi(G),\chi(H)\geq n\}.
+\]
+The weak Hedetniemi conjecture asserts that $f$ is unbounded. We prove the following.
+
+\begin{theorem}\label{thm:main}
+For every $n\in\N$, there are finite simple graphs $G,H$ with
+\[
+ \chi(G),\chi(H)>n,
+ \qquad \chi(G\times H)\leq5.
+\]
+Consequently, $f(n)\leq5$ for all $n$.
+\end{theorem}
+
+In his August 2026 preprint~\cite{Raanes}, Raanes proposed a proof of $f(n)\leq4$ using generalized Borsuk graphs. Its Lemma~2.6 asserts the existence of an equivariant map into a representation two-sphere. Section~\ref{sec:obstruction} shows that this map is impossible already on $S^1\times S^5$ and on a single $S^5$ with a free scalar action. The author communicated the obstruction and the five-color correction to Raanes, as recorded in the October~30 preprint~\cite[\S3.1, footnote~2]{ZeissOR}. Raanes's November~19 seminar abstract announced examples with product chromatic number five~\cite{RaanesSeminar}.
+
+For each odd prime $p$, adding one sign coordinate gives a representation three-sphere for $C_2\times C_p$. In Section~\ref{sec:maps} we construct an equivariant self-map of degree zero and use it to map every finite free complex for this group equivariantly into the sphere. For $p=13$, Section~\ref{sec:graphs} shows that the corresponding generalized Borsuk graph has chromatic number five and uses Raanes's product argument to color the product of two finite graphs.
+
+El-Zahar and Sauer~\cite{ElZaharSauer} give $f(n)\geq4$ for $n\geq4$, and Tardif~\cite{Tardif} gives $f(5)=4$. Together with Theorem~\ref{thm:main}, these results imply
+\[
+ 4\leq f(n)\leq5\qquad(n\geq4).
+\]
+Since $f$ is nondecreasing and integer-valued, the remaining question is whether $f(n)=4$ for every $n\geq4$ or $f(n)=5$ for all sufficiently large $n$.
+
+\section{Equivariant maps to a three-sphere}\label{sec:maps}
+
+For an odd prime $p$, set $\Gamma=C_2\times C_p$, write $a,b$ for the respective generators, and put
+\[
+ \zeta=e^{2\pi i/p},\qquad q=(p-1)/2.
+\]
+On $\C^2$, let
+\begin{equation}\label{eq:action}
+ a(z,w)=(-z,w),\qquad b(z,w)=(z,\zeta^q w).
+\end{equation}
+Write $W'_p$ for the unit sphere of this representation. Thus $W'_p\cong S^3$, and the generator $ab$ of $\Gamma\cong C_{2p}$ acts by
+\begin{equation}\label{eq:beta}
+ \beta_p(z,w)=(-z,e^{(p-1)\pi i/p}w).
+\end{equation}
+Every group element preserves orientation. Points with both coordinates nonzero have trivial stabilizer.
+
+We first record the finite extension argument that will be used below. A free simplicial action is an action free on the geometric realization.
+
+\begin{lemma}\label{lem:skeletal}
+Let a finite group $\Lambda$ act continuously on a nonempty space $Y$. Suppose that $Y$ has a $\Lambda$-equivariant self-map $h$ which is nullhomotopic as an ordinary map. Then every finite free simplicial $\Lambda$-complex admits a continuous $\Lambda$-equivariant map to $Y$.
+\end{lemma}
+\begin{proof}
+Let $K$ be such a complex. Choose images for representatives of its vertex orbits and extend equivariantly to $K^{(0)}$. Suppose that $f_j:K^{(j)}\to Y$ is equivariant. Replace it by $h\circ f_j$. For each $(j+1)$-simplex, the map on its boundary is nullhomotopic, since $h$ is nullhomotopic, and therefore extends over the simplex. Choose an extension on one representative of each simplex orbit and translate it by $\Lambda$.
+
+There are no nontrivial setwise stabilizers of simplices: such a stabilizer would fix the barycenter, contrary to freeness. The translated extensions are consequently well-defined and agree on their boundaries. They give an equivariant map on $K^{(j+1)}$. Since $K$ is finite-dimensional, iteration terminates. The maps on earlier skeleta are allowed to change at each stage; only the final map on $K$ is required.
+\end{proof}
+
+\begin{lemma}\label{lem:degreezero}
+The representation sphere $W'_p$ admits a $\Gamma$-equivariant self-map of degree zero.
+\end{lemma}
+\begin{proof}
+Consider
+\begin{equation}\label{eq:power}
+ F(z,w)=\frac{(z^p,w^{p+1})}
+ {\sqrt{|z|^{2p}+|w|^{2p+2}}}.
+\end{equation}
+The denominator is positive on $S^3$. Since $p$ is odd and $p+1\equiv1\pmod p$, the map is equivariant for both generators in~\eqref{eq:action}.
+
+We have $\deg F=p(p+1)$. Indeed, write $z=r e^{i\theta}$ and $w=\sqrt{1-r^2}e^{i\phi}$ away from the coordinate circles. The ratio of the output moduli is
+\[
+ \frac{r^p}{(1-r^2)^{(p+1)/2}},
+\]
+which is strictly increasing from zero to infinity. A regular target with both coordinates nonzero therefore has a unique pair of input moduli, $p$ choices of the first argument, and $p+1$ choices of the second. The radial coordinate and both angular coordinates preserve orientation locally. All $p(p+1)$ preimages have positive local degree.
+
+Choose a point with trivial stabilizer and a small closed ball $D$ around it such that the $2p$ translates $gD$ are pairwise disjoint. A map from a three-ball to $S^3$ can be modified in its interior, relative to the boundary, by any prescribed integer degree. To see this explicitly, precompose on $D$ with a map homotopic to the identity relative to $\partial D$ that collapses a smaller concentric ball $D_0$ to the center. The resulting map is constant on $D_0$. Replace that constant restriction by a map $D_0/\partial D_0\cong S^3\to S^3$ of degree $k$, with basepoint the constant value. The relative homology description of degree shows that this replacement changes the total degree by $k$. Perform the preliminary homotopy and this replacement on all translates of $D$ by equivariance. Choose
+\[
+ k=-\frac{p+1}{2}.
+\]
+Both domain and target actions preserve orientation, so every translate makes the same degree change $k$. Outside these balls retain $F$. The resulting equivariant map $h$ satisfies
+\[
+ \deg h=\deg F+|\Gamma|k
+ =p(p+1)-2p\frac{p+1}{2}=0.
+\]
+This is the desired map.
+\end{proof}
+
+\begin{remark}
+Lemma~\ref{lem:degreezero} is also a special case of the degree-zero mapping result in~\cite[Lemma~14]{Leary}, attributed there to Bob Oliver. That result applies to the unit sphere of a complex representation containing orbits of coprime lengths. Here the coordinate circles contain orbits of lengths $2$ and $p$. The direct proof above gives the required degree adjustment for this particular representation.
+\end{remark}
+
+\begin{proposition}\label{prop:universal}
+Every finite free simplicial $\Gamma$-complex admits a continuous equivariant map to $W'_p$.
+\end{proposition}
+\begin{proof}
+A degree-zero self-map of $S^3$ is nullhomotopic, by the degree classification of maps between spheres; see, for example,~\cite[Corollary~4.25]{HatcherAT}. Apply Lemmas~\ref{lem:degreezero} and~\ref{lem:skeletal}.
+\end{proof}
+
+\begin{remark}\label{rem:positive}
+Basu and Ghosh~\cite[Proposition~3.2]{BasuGhosh} give an equivariant map from the universal free space $E\Gamma$ to this three-sphere. In their notation, let $\xi$ be the complex character with $\xi(ab)=e^{\pi i/p}$. For $\Gamma=C_{2p}$ their target is $S(\xi^p\oplus\xi^2)$. Choose an odd integer $k\equiv q\pmod p$. Pulling back the action along the automorphism $ab\mapsto(ab)^k$ changes the characters to $\xi^p$ and $\xi^{2q}$, exactly the action in~\eqref{eq:beta}. The pullback of $E\Gamma$ is again a model for $E\Gamma$.
+
+This target is the join of two circles, a case of the construction of Dror Farjoun and Zabrodsky~\cite[Proposition~3.3]{FarjounZabrodsky}. In their proof the $C_p$-fixed circle is connected, so constant maps to points on it lie in a single path component of the $C_p$-equivariant mapping space. The residual $C_2$-action preserves this component. Section~\ref{sec:obstruction} examines this condition for the two-sphere. The finite skeletal proof above supplies the maps required for our graph construction.
+\end{remark}
+
+\section{Finite graph construction}\label{sec:graphs}
+
+All spheres below carry the angular metric. If $\rho$ is an isometry of a metric space $X$, define $B_\rho(X,\delta)$ by the symmetric adjacency condition
+\begin{equation}\label{eq:borsuk}
+ u\sim v\quad\Longleftrightarrow\quad
+ d(u,\rho^{-1}v)<\delta
+ \text{ or }d(v,\rho^{-1}u)<\delta.
+\end{equation}
+We use this notation only when
+\begin{equation}\label{eq:loopless}
+ \delta<\inf_{x\in X}d(x,\rho x),
+\end{equation}
+which excludes loops. If $T$ is a triangulation of $X$, the induced graph on its finite vertex set is denoted by $B_\rho(T,\delta)$. The realization map of $T$ is understood in this notation. Generalized Borsuk graphs in this form and their use for graph products are the framework of~\cite{Raanes}.
+
+\subsection{A fixed five-color target}
+
+\begin{lemma}\label{lem:fivecolors}
+The graph $B_{\beta_{13}}(W'_{13},1/4)$ has chromatic number five.
+\end{lemma}
+\begin{proof}
+Let $v_0,\ldots,v_4\in S^3$ be the vertices of a regular simplex, so $\langle v_i,v_j\rangle=-1/4$ when $i\neq j$. Assign $x\in S^3$ a color $i$ maximizing $\langle x,v_i\rangle$, breaking ties by the smallest index. Every assigned point satisfies
+\begin{equation}\label{eq:cap}
+ \langle x,v_i\rangle\geq\frac14.
+\end{equation}
+For completeness, write $t_i=\langle x,v_i\rangle$ and $M=\max_i t_i$. The simplex identities give $\sum_i t_i=0$ and $\sum_i t_i^2=5/4$. Since $M-t_i\geq0$,
+\[
+ \frac54+5M^2
+ =\sum_i(M-t_i)^2
+ \leq\left(\sum_i(M-t_i)\right)^2
+ =25M^2.
+\]
+Thus $M\geq1/4$, proving~\eqref{eq:cap}.
+
+Two points of the same color lie in a spherical cap of radius $\arccos(1/4)$. Their distance is at most
+\[
+ 2\arccos(1/4)=\pi-2\arcsin(1/4)<\pi-\frac12.
+\]
+Consequently this coloring is proper whenever adjacency implies $d(u,-v)<1/2$.
+
+The action~\eqref{eq:beta} satisfies
+\[
+ \sup_{x\in S^3}d(\beta_p^{-1}x,-x)\leq\frac\pi p.
+\]
+Indeed, $-\beta_p^{-1}$ is the identity on the first complex coordinate and a rotation through $\pi/p$ on the second. Since $\pi/13<1/4$, either inequality in~\eqref{eq:borsuk}, with $\delta=1/4$, gives
+\[
+ d(u,-v)<\frac14+\frac\pi{13}<\frac12.
+\]
+This gives a proper five-coloring. The same displacement estimate gives $d(x,\beta_{13}x)\geq12\pi/13$ at every point, so~\eqref{eq:loopless} holds.
+
+For the lower bound, put $\eps=1/4-\pi/13>0$. Whenever $d(u,-v)<\eps$, we have
+\[
+ d(u,\beta_{13}^{-1}v)\leq d(u,-v)+d(-v,\beta_{13}^{-1}v)<1/4.
+\]
+Thus the target contains the ordinary antipodal Borsuk graph $B_{-\id}(S^3,\eps)$ as a spanning subgraph. In a proper coloring of this subgraph, any two points of the same color satisfy $d(u,-v)\geq\eps$. This inequality persists on the closure of each color class, so each closure avoids antipodal pairs. By the Lyusternik--Schnirelmann covering theorem, every cover of $S^3$ by four closed sets has a member containing an antipodal pair~\cite[\S2.1]{Matousek}. Hence at least five colors are needed.
+\end{proof}
+
+\subsection{Large chromatic numbers on finite vertex sets}
+
+Write $C_r$ for the graph on $\Z/r\Z$ with edges between consecutive residues; in particular, $C_2=K_2$. We recall the elementary part of the Hom-complex construction~\cite{BabsonKozlov}. For finite graphs $A,B$, a multihomomorphism $\eta$ assigns a nonempty subset $\eta(v)\subseteq V(B)$ to each $v\in V(A)$, such that $uv\in E(A)$ implies that every element of $\eta(u)$ is adjacent to every element of $\eta(v)$. The poset $\Hom(A,B)$ is ordered by coordinatewise inclusion. Its order complex is denoted by $\Delta\Hom(A,B)$.
+
+Rotation of $C_r$ induces an action on this poset by
+\[
+ (\rho\eta)(i)=\eta(i+1).
+\]
+We will use Dold's theorem~\cite{Dold}: if a nontrivial finite group acts on an $s$-connected complex $X$ and acts freely on a complex $Y$ of dimension at most $s$, there is no equivariant map $X\to Y$.
+
+\begin{lemma}\label{lem:finite-lower}
+Let $n\geq1$, let $r$ be prime, and let $\rho$ generate a free orthogonal $C_r$-action on $S^m$. Let $T$ be a finite equivariant triangulation of $S^m$ of mesh less than $\delta$, where~\eqref{eq:loopless} holds. If $m>n\lfloor r/2\rfloor-r$, then
+\[
+ \chi(B_\rho(T,\delta))>n.
+\]
+\end{lemma}
+\begin{proof}
+Put $J=B_\rho(T,\delta)$ and let $\mathcal F(T)$ be the poset of nonempty faces of $T$. Define
+\[
+ \Phi:\mathcal F(T)\longrightarrow\Hom(C_r,J),
+ \qquad \Phi(\sigma)(i)=\rho^iV(\sigma).
+\]
+For $u,v\in V(\sigma)$, we have
+\[
+ d(\rho^iu,\rho^{-1}\rho^{i+1}v)=d(u,v)<\delta.
+\]
+Thus $\Phi(\sigma)$ is a multihomomorphism; the displacement condition rules out coincident adjacent vertices. The map preserves inclusion and is equivariant, since
+\[
+ \Phi(\rho\sigma)(i)=\rho^{i+1}V(\sigma)
+ =(\rho\Phi(\sigma))(i).
+\]
+An $n$-coloring of $J$ would compose with $\Phi$ to give an equivariant map
+\begin{equation}\label{eq:dold-map}
+ S^m\cong|\Delta\mathcal F(T)|
+ \longrightarrow |\Delta\Hom(C_r,K_n)|.
+\end{equation}
+
+If the target is empty,~\eqref{eq:dold-map} is impossible. Otherwise, for each $\eta\in\Hom(C_r,K_n)$ and each color $c$, the indices $i$ with $c\in\eta(i)$ form an independent set in $C_r$. Such a set has size at most $\lfloor r/2\rfloor$, including for $C_2=K_2$. Counting occurrences of all $n$ colors gives
+\[
+ r\leq \sum_{i\in\Z/r\Z}|\eta(i)|\leq n\lfloor r/2\rfloor .
+\]
+The sum strictly increases at each step of a strict chain, so the target in~\eqref{eq:dold-map} has dimension at most $n\lfloor r/2\rfloor-r$.
+
+The $C_r$-action on this target is free. A multihomomorphism fixed by a nonidentity rotation would have all its coordinate sets equal, because $r$ is prime. This contradicts the absence of loops in $K_n$. A fixed point of the order complex would stabilize its supporting chain and hence fix every member. Since $S^m$ is $(m-1)$-connected and the target has dimension at most $m-1$, Dold's theorem excludes~\eqref{eq:dold-map}.
+\end{proof}
+
+The triangulations used in Lemma~\ref{lem:finite-lower} exist with arbitrarily small mesh. One may take an invariant convex polytope containing the origin in its interior, triangulate its boundary equivariantly by barycentric subdivision, and project radially to the sphere. Further subdivisions have mesh tending to zero. Products of these finite complexes likewise admit finite equivariant triangulations.
+
+\subsection{Proof of the main theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+Fix $p=13$, the target $W'_{13}$, and a coloring
+\[
+ c:B_{\beta_{13}}(W'_{13},1/4)\longrightarrow K_5
+\]
+from Lemma~\ref{lem:fivecolors}. These choices do not depend on $n$. It suffices to consider $n\geq3$. Choose an odd integer $m>6n-13$ and let
+\[
+ X=S^m,\qquad Y=S^m\subset\C^{(m+1)/2}.
+\]
+Let $a$ act antipodally on $X$ and trivially on $Y$, and let $b$ act trivially on $X$ and by $\omega y=e^{2\pi i/13}y$ on $Y$. The resulting $\Gamma$-action on $X\times Y$ is free. Proposition~\ref{prop:universal} gives an equivariant continuous map
+\[
+ \varphi:X\times Y\longrightarrow W'_{13}.
+\]
+Equip the product with the maximum of the two angular distances. By compactness and uniform continuity, choose $\delta>0$ such that
+\begin{equation}\label{eq:uniform}
+ d_{\max}(s,t)<\delta
+ \quad\Longrightarrow\quad
+ d(\varphi(s),\varphi(t))<\frac14.
+\end{equation}
+Shrink $\delta$ so that $\delta<2\pi/13$. This is less than the displacement of either source generator: the antipodal displacement is $\pi$ and the scalar-rotation displacement is $2\pi/13$.
+
+Choose finite equivariant triangulations $T_2$ of $X$ and $T_{13}$ of $Y$, both of mesh less than $\delta$, and put
+\[
+ G=B_{-\id}(T_2,\delta),\qquad
+ H=B_\omega(T_{13},\delta).
+\]
+These graphs are finite and simple. The dimension thresholds in Lemma~\ref{lem:finite-lower} are $n-2$ for $r=2$ and $6n-13$ for $r=13$. Since $n-2\leq6n-13$ for $n\geq3$, the lemma gives $\chi(G),\chi(H)>n$.
+
+We claim that
+\begin{equation}\label{eq:product-color}
+ (u,v)\longmapsto c(\varphi(u,v))
+\end{equation}
+properly colors $G\times H$. Let $(u,v)$ and $(u',v')$ be adjacent. Reverse the two endpoints if necessary so that $d(v,\omega^{-1}v')<\delta$. For the first factor, adjacency means $d(u,-u')<\delta$, and this condition is unchanged by reversing the endpoints. It follows that
+\[
+ d_{\max}\bigl((u,v),(ab)^{-1}(u',v')\bigr)<\delta.
+\]
+Equivariance and~\eqref{eq:uniform} imply
+\[
+ d\bigl(\varphi(u,v),\beta_{13}^{-1}\varphi(u',v')\bigr)<\frac14.
+\]
+The two images are adjacent in the target graph. Since $c$ is proper, their colors in~\eqref{eq:product-color} differ. This proves $\chi(G\times H)\leq5$.
+\end{proof}
+
+\begin{remark}
+The proof selects finite vertex sets only after the equivariant map and its continuity scale have been chosen. It does not invoke an infinite-graph coloring theorem. It is an existence construction; no effective bound on the necessary subdivision depth or the number of vertices is asserted.
+\end{remark}
+
+\section{The obstruction to the two-sphere target}\label{sec:obstruction}
+
+We now consider the original target in~\cite[Lemma~2.6]{Raanes}. On $\R\oplus\C$, let
+\begin{equation}\label{eq:old-action}
+ a(t,z)=(-t,z),\qquad b(t,z)=(t,\zeta^qz),
+ \qquad q=(p-1)/2.
+\end{equation}
+Write $W_p=S(\R\oplus\C)$ with this action. The generator $ab$ acts by precisely the matrix $\alpha_p$ in~\cite{Raanes}; conversely, $a=\alpha_p^p$ and $b=\alpha_p^{p+1}$. Its $C_p$-fixed set consists of the two poles, which are interchanged by $a$.
+
+\begin{proposition}\label{prop:obstruction}
+Let $p$ be an odd prime. On $S^1\times S^5\subset\C\times\C^3$, let $a(x,y)=(-x,y)$ and $b(x,y)=(x,\zeta y)$. There is no continuous $\Gamma$-equivariant map
+\[
+ S^1\times S^5\longrightarrow W_p.
+\]
+The same obstruction excludes a map from $S^m\times S^m$ for every odd $m\geq5$ with the corresponding antipodal and scalar actions. It also excludes a map from the single sphere $S^5\subset\C^3$ with the free scalar action $a(y)=-y$, $b(y)=\zeta y$.
+\end{proposition}
+\begin{proof}
+Let $M=S^5/C_p$ be the five-dimensional lens space. Define the associated complex line bundle explicitly by
+\[
+ L=(S^5\times\C)/\bigl((y,z)\sim(\zeta y,\zeta^q z)\bigr),
+ \qquad L\longrightarrow M,
+\]
+and put
+\[
+ E=\triv\oplus L_{\R}.
+\]
+Orient this real rank-three bundle by its standard real-line and complex-line orientations. The integral cohomology of $M$ satisfies
+\begin{equation}\label{eq:lens}
+ H^2(M;\Z)=\Z/p\,\langle t\rangle,\qquad
+ H^4(M;\Z)=\Z/p\,\langle t^2\rangle,
+ \qquad t^2\neq0;
+\end{equation}
+see~\cite[Example~3.41]{HatcherAT}. These integral groups and products can also be computed directly. Let $\pi:M\to\C P^2$ be the quotient Hopf fibration, let $\gamma$ be the tautological line bundle on $\C P^2$, and put $u=c_1(\gamma^*)$. The circle bundle $M$ is the unit-circle bundle of $\gamma^{\otimes p}$, via $[y]\mapsto y^{\otimes p}$, and has Euler class $-pu$. Its Gysin sequence shows that $\pi^*$ is reduction modulo $p$ in degrees two and four. Hence $t=\pi^*u$ has the properties in~\eqref{eq:lens}. The weight-one associated line is $\pi^*\gamma^*$: the class $[y,z]$ specifies the linear functional on $\C y$ whose value at $y$ is $z$. Taking its $q$th tensor power gives $L$, so $c_1(L)=qt$. In particular,
+\begin{equation}\label{eq:chern-nonzero}
+ c_1(L)^2\neq0,
+\end{equation}
+since $q$ is nonzero modulo $p$.
+
+Suppose that an equivariant map $f:S^1\times S^5\to W_p$ exists. Fix $x\in S^1$. The $C_p$-equivariant map $y\mapsto f(x,y)$ defines the unit section $s_x([y])=[y,f(x,y)]$ of $E$. This is well-defined for the displayed diagonal quotient. Orient its perpendicular plane bundle $\eta_x=s_x^{\perp}$ by requiring that the positive section $s_x$, followed by a positive basis of $\eta_x$, be positively oriented in $E$.
+
+A path in $S^1$ from $x$ to $-x$ gives a homotopy between the sections $s_x$ and $s_{-x}$. The perpendicular planes form an oriented rank-two bundle over $[0,1]\times M$. Its endpoint restrictions therefore have the same Euler class. On the other hand, $C_2$-equivariance gives
+\[
+ s_{-x}=r\circ s_x,\qquad
+ r=\operatorname{diag}(-1,1,1):E\longrightarrow E.
+\]
+This bundle map reverses the ambient orientation and carries the positive section to the positive section. It consequently reverses the induced orientation on the perpendicular plane. Naturality and orientation reversal of the Euler class yield
+\[
+ e(\eta_x)=e(\eta_{-x})=-e(\eta_x).
+\]
+By~\eqref{eq:lens} and oddness of $p$, this implies $e(\eta_x)=0$.
+
+But the section gives $E\cong\triv\oplus\eta_x$, and the characteristic-class identities for an oriented real two-plane bundle give
+\begin{equation}\label{eq:contradiction}
+ 0=e(\eta_x)^2
+ =p_1(\eta_x)
+ =p_1(E)
+ =c_1(L)^2\neq0.
+\end{equation}
+Here we use stability of $p_1$, the identity $p_1(\eta)=e(\eta)^2$, and $e(L_{\R})=c_1(L)$; see~\cite[Propositions~3.13 and~3.15]{HatcherVB}. These are integral identities. Equivalently, regard $\eta_x$ as a complex line $A$ with $c_1(A)=e(\eta_x)$. Complexification gives
+\[
+ \underline\C\oplus L\oplus L^{-1}
+ \cong \underline\C\oplus A\oplus A^{-1}.
+\]
+Comparing second Chern classes gives $c_1(L)^2=e(\eta_x)^2$, including the $p$-torsion in~\eqref{eq:lens}. This contradiction proves the first assertion.
+
+For odd $m\geq5$, the coordinate inclusion $S^1\times S^5\hookrightarrow S^m\times S^m$ is equivariant. For the single sphere with its scalar action, multiplication $(x,y)\mapsto xy$ gives an equivariant map $S^1\times S^5\to S^5$. Composing either map with a putative map to $W_p$ contradicts the first assertion.
+\end{proof}
+
+\begin{remark}\label{rem:source}
+The sources in Proposition~\ref{prop:obstruction} are free and admit finite equivariant triangulations. Thus they contradict the assertion in~\cite[Lemma~2.6]{Raanes} that every finite free $C_{2p}$-complex maps to $W_p$. The product assertion excludes the specific maps used in~\cite[Theorem~3.7]{Raanes}.
+
+The representation $V=\R\oplus\C$ in~\eqref{eq:old-action} satisfies $V^\Gamma=0$, $\dim_{\R}V^{C_2}=2$ and $\dim_{\R}V^{C_p}=1$. Consequently, \cite[Theorem~4.4]{BasuGhosh} would give equivariant maps $S(U)\to W_p$ from representation spheres of arbitrarily high dimension. In fact, any $S(U)$ of dimension at least five is $4$-connected, so the free scalar $S^5$ maps equivariantly to $S(U)$ by extension over its cell orbits. Composition would contradict Proposition~\ref{prop:obstruction}.
+
+The even-order case in the proof of~\cite[Theorem~3.3]{BasuGhosh} asserts an equivariant map $EC_{2p}\to S(\sigma\oplus\xi^2)$, where $\sigma$ is the real sign line. The change of generator in Remark~\ref{rem:positive} takes this target to $W_p$. Since the free scalar $S^5$ maps equivariantly to $E\Gamma$, Proposition~\ref{prop:obstruction} rules out this intermediate map. The target in the statement of that theorem is a sphere in a sum of copies of the reduced regular representation.
+\end{remark}
+
+\subsection{The missing path-component condition}
+
+The obstruction also identifies a failure in the lifting argument used in~\cite[Theorem~4.4]{BasuGhosh}. Take the standard models $EC_2=S^\infty$ with the antipodal action and $EC_p=S^\infty\subset\C^\infty$ with the scalar action. Put $E\Gamma=EC_2\times EC_p$ and consider
+\[
+ \mathcal M=\operatorname{Map}^{C_p}(E\Gamma,W_p),
+ \qquad (a\cdot v)(e)=a\,v(a^{-1}e).
+\]
+Mapping spaces are taken in the compactly generated topology. Fix $x_0\in EC_2$ and restrict $v$ to $\{x_0\}\times S^5\subset E\Gamma$. As in the proof of Proposition~\ref{prop:obstruction}, this restriction determines a section of $E=\triv\oplus L_\R$ and an oriented perpendicular plane bundle. Its Euler class, denoted $e(v)$, satisfies
+\[
+ e(v)^2=q^2t^2.
+\]
+Writing $e(v)=\lambda t$ in $H^2(M;\Z)$ shows that $\lambda^2=q^2$ in the field $\Z/p$, so
+\[
+ e(v)\in\{qt,-qt\}.
+\]
+The label is constant along paths in $\mathcal M$. Moving $x_0$ to $-x_0$ along a path in $EC_2$ does not change it, whereas the target reflection $a$ negates it. Hence $e(a\cdot v)=-e(v)$. Since the two labels are distinct, no path component of $\mathcal M$ is preserved by $C_2$. In particular, there is no continuous $C_2$-equivariant map $EC_2\to\mathcal M$: the image of the path-connected domain would lie in a single invariant path component.
+
+In~\cite[Lemma~3.1]{BasuGhosh}, the mapping space is restricted to a chosen path component. In the application above, that component does not carry the residual $C_2$-action needed for the proposed equivariant lift. If the full mapping space is retained instead, its components obstruct the lift before the calculation with higher homotopy groups applies. Thus the vanishing of those later obstruction groups does not justify the lift in this instance. This diagnosis concerns the stated application, not the componentwise assertion of that lemma.
+
+For the finite graph products themselves, the companion paper~\cite[Corollary~5.2]{Companion} gives a matching lower bound when $p=13$ and the sphere dimension $m$ is odd and at least~$57$. Thus these products have chromatic number exactly five in that range. A uniform four-color bound for the Poljak--R\"odl function would require other graph pairs.
+
+\section*{Development note}
+The obstruction, replacement mapping argument, and preparation of this draft were developed with substantial assistance from OpenAI Codex. The graph-product framework and the motivating four-color claim are due to Raanes~\cite{Raanes}.
+
+\begin{thebibliography}{10}
+
+\bibitem{BabsonKozlov}
+E. Babson and D. N. Kozlov,
+\emph{Complexes of graph homomorphisms},
+Israel J. Math. \textbf{152} (2006), 285--312.
+
+\bibitem{BasuGhosh}
+S. Basu and S. Ghosh,
+\emph{Equivariant maps related to the topological Tverberg conjecture},
+Homology Homotopy Appl. \textbf{19} (2017), no.~1, 155--170.
+\href{https://arxiv.org/abs/1510.01470v2}{arXiv:1510.01470v2}.
+
+\bibitem{Dold}
+A. Dold,
+\emph{Simple proofs of some Borsuk--Ulam results},
+Contemp. Math. \textbf{19} (1983), 65--69.
+
+\bibitem{FarjounZabrodsky}
+E. Dror Farjoun and A. Zabrodsky,
+\emph{Fixed points and homotopy fixed points},
+Comment. Math. Helv. \textbf{63} (1988), 286--295.
+\href{https://doi.org/10.1007/BF02566768}{doi:10.1007/BF02566768}.
+
+\bibitem{ElZaharSauer}
+M. El-Zahar and N. Sauer,
+\emph{The chromatic number of the product of two $4$-chromatic graphs is $4$},
+Combinatorica \textbf{5} (1985), no.~2, 121--126.
+
+\bibitem{HatcherAT}
+A. Hatcher,
+\emph{Algebraic Topology},
+Cambridge University Press, Cambridge, 2002.
+\url{https://pi.math.cornell.edu/~hatcher/AT/AT.pdf}.
+
+\bibitem{HatcherVB}
+A. Hatcher,
+\emph{Vector Bundles and K-Theory},
+version 2.2, November 2017.
+\url{https://pi.math.cornell.edu/~hatcher/VBKT/VB.pdf}.
+
+\bibitem{Leary}
+I. J. Leary,
+\emph{On finite subgroups of groups of type VF},
+Geom. Topol. \textbf{9} (2005), 1953--1976.
+\url{https://msp.org/gt/2005/9-4/gt-v9-n4-p05-p.pdf}.
+
+\bibitem{Matousek}
+J. Matou\v{s}ek,
+\emph{Using the Borsuk--Ulam Theorem: Lectures on Topological Methods in Combinatorics and Geometry},
+Springer, Berlin, 2003.
+
+\bibitem{Raanes}
+S. Raanes,
+\emph{Counterexamples to the weak Hedetniemi Conjecture},
+preprint, 2026.
+\href{https://arxiv.org/abs/2608.07818v1}{arXiv:2608.07818v1}.
+All references to its numbered statements concern version~1.
+
+\bibitem{RaanesSeminar}
+S. Raanes,
+\emph{Counterexamples to the weak Hedetniemi Conjecture},
+Combinatorics Seminar, The Ohio State University, November 19, 2026.
+\href{https://math.osu.edu/events/combinatorics-seminar-steven-raanes}{Seminar abstract}.
+
+\bibitem{Shitov}
+Y. Shitov,
+\emph{Counterexamples to Hedetniemi's conjecture},
+Ann. of Math. (2) \textbf{190} (2019), no.~2, 663--667.
+\href{https://doi.org/10.4007/annals.2019.190.2.6}{doi:10.4007/annals.2019.190.2.6}.
+
+\bibitem{Tardif}
+C. Tardif,
+\emph{The chromatic number of the product of $5$-chromatic graphs can be $4$},
+Combinatorica \textbf{43} (2023), 1067--1073.
+\href{https://doi.org/10.1007/s00493-023-00047-2}{doi:10.1007/s00493-023-00047-2}.
+
+\bibitem{ZeissOR}
+J. A. Zeiss,
+\emph{Hedetniemi's conjecture for Shannon OR-capacity: counterexamples and asymptotic separation},
+preprint, 2026.
+\href{https://arxiv.org/abs/2610.41977v1}{arXiv:2610.41977v1}.
+
+\bibitem{Companion}
+J. A. Zeiss,
+\emph{Why the sphere-product construction needs five colors},
+companion manuscript, November 2026.
+
+\end{thebibliography}
+\end{document}
